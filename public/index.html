@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <head>
+        <!--                        
+                     _   __            _  _             
+                    (_) / _|          | |(_)            
+         _ __  _   _  _ | |_  __ _   __| | _   __ _  ___ 
+        | '__|| | | || ||  _|/ _` | / _` || | / _` |/ __|
+        | |   | |_| || || | | (_| || (_| || || (_| |\__ \
+        |_|    \__,_||_||_|  \__, | \__,_||_| \__,_||___/
+                              __/ |                      
+                             |___/                       
+                                  -->
+        <title>Hello World - Typescript </title>
+        <script type="text/javascript">
+         var callGetAPI = function() {
+            getJSON("http://localhost:8080/api/things", (err, res) => {
+                var elemH2 = document.createElement('h2');
+                elemH2.style.cssText = 'width:100%;height:20px;opacity:0.3;';
+                elemH2.textContent = res.server;
+                document.body.appendChild(elemH2);
+            });
+        };
+
+        var getJSON = function(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("get", url, true);
+            xhr.responseType = "json";
+            xhr.onload = function () {
+                var status = xhr.status;
+                if (status == 200) {
+                    callback(null, xhr.response);
+                } else {
+                    callback(status);
+                }
+            };
+            xhr.send();
+        };
+        </script>
+    </head>
+    <body>
+        <h1>Hello World</h1>
+        <button type="button" onclick="callGetAPI()">Click Me!</button>
+    </body>
+</html>
